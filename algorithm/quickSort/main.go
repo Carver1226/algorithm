@@ -7,14 +7,12 @@ func quickSort(arr []int, left int, right int) {
 		return
 	}
 	x := arr[(left + right) / 2]
-	l := left - 1
-	r := right + 1
+	l := left
+	r := right
 	for l < r {
-		l++
 		for arr[l] < x {
 			l++
 		}
-		r--
 		for arr[r] > x {
 			r--
 		}

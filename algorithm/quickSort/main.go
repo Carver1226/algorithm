@@ -1,27 +1,37 @@
-package quickSort
+package main
+
+import "fmt"
 
 func quickSort(arr []int, left int, right int) {
 	if left >= right {
 		return
 	}
 	x := arr[(left + right) / 2]
-	l := left
-	r := right
+	l := left - 1
+	r := right + 1
 	for l < r {
+		l++
 		for arr[l] < x {
 			l++
 		}
+		r--
 		for arr[r] > x {
 			r--
 		}
 		if l < r {
-			swap(&arr[l], &arr[r])
+			arr[l], arr[r] = swap(arr[l], arr[r])
 		}
 	}
-	quickSort(arr, left, (left + right) / 2)
-	quickSort(arr, (left + right) / 2 + 1, right)
+	quickSort(arr, left, r)
+	quickSort(arr, r + 1, right)
 }
 
-func swap(a *int, b *int) {
-	a, b = b, a
+func swap(a int, b int) (int, int){
+	return b, a
+}
+
+func main() {
+	arr := []int{2, 5, 6, 1, 4, 8}
+	quickSort(arr, 0, 5)
+	fmt.Printf("%v", arr)
 }
